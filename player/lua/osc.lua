@@ -2111,10 +2111,13 @@ local function show_osc()
     --remember last time of invocation (mouse move)
     state.showtime = mp.get_time()
 
-    osc_visible(true)
-
     if user_opts.fadeduration > 0 then
-        state.anitype = nil
+        if not state.osc_visible then
+            state.anitype = "in"
+            request_tick()
+        end
+    else
+        osc_visible(true)
     end
 end
 
